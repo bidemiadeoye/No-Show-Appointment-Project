@@ -34,9 +34,9 @@ def load_data():
             print("Detected columns:", list(data[0].keys()), "\n")
 
             if validate_columns(data):
-    return data
-else:
-    return None
+                return data
+            else:
+                return None
 
     except FileNotFoundError:
         print("\nError: File not found.\n")
@@ -282,10 +282,10 @@ def main():
         elif choice == '6':
             data = load_data()
         elif choice == '7':
-    print("\nThank you for using the Healthcare No-Show Analysis Tool.")
-    break
+            print("\nThank you for using the Healthcare No-Show Analysis Tool.")
+            break
         else:
-            print("Invalid input")
+            print("\nInvalid input. Please try again.\n")
 
 
 if __name__ == "__main__":
