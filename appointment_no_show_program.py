@@ -46,6 +46,30 @@ def load_data():
 def safe_get(row, key):
     return row.get(key, "").strip()
 
+# -----------------------------------------------------------
+# Validate required columns
+# -----------------------------------------------------------
+def validate_columns(data):
+    required_columns = [
+        'age',
+        'appointment_time',
+        'day_of_week',
+        'attended'
+    ]
+
+    actual_columns = list(data[0].keys())
+
+    missing = [col for col in required_columns if col not in actual_columns]
+
+    if missing:
+        print("\nERROR: Missing required columns:")
+        for col in missing:
+            print("-", col)
+
+        print("\nPlease load a properly formatted CSV file.\n")
+        return False
+
+    return True
 
 # -----------------------------------------------------------
 # Overall No-Show Rate
