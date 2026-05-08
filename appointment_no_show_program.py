@@ -33,7 +33,10 @@ def load_data():
             print("\nData loaded successfully.\n")
             print("Detected columns:", list(data[0].keys()), "\n")
 
-            return data
+            if validate_columns(data):
+    return data
+else:
+    return None
 
     except FileNotFoundError:
         print("\nError: File not found.\n")
