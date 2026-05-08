@@ -44,7 +44,8 @@ else:
 
 
 # -----------------------------------------------------------
-# Safe getter (prevents crashes)
+# Using a safe getter prevents crashes caused by missing
+# or improperly formatted CSV fields.
 # -----------------------------------------------------------
 def safe_get(row, key):
     return row.get(key, "").strip()
@@ -90,7 +91,8 @@ def overall_no_show_rate(data):
 
 
 # -----------------------------------------------------------
-# Text Chart
+# Text-based charts were intentionally used instead of
+# external visualization libraries to maximize portability.
 # -----------------------------------------------------------
 def print_bar_chart(results):
     for key, value in results.items():
