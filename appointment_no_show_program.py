@@ -27,7 +27,7 @@ def load_data():
             data = list(reader)
 
             if not data:
-                print("File is empty.\n")
+                print("\nERROR: File is empty.\n")
                 return None
 
             print("\nData loaded successfully.\n")
@@ -232,7 +232,8 @@ def export_summary(data):
                 rate = (vals['no_show']/vals['total'])*100
                 writer.writerow([day, round(rate, 2)])
 
-        print("\nSaved at:", os.path.abspath(file_name), "\n")
+        print("\nSummary exported successfully.")
+        print("Saved at:", os.path.abspath(file_name), "\n")
 
     except Exception as e:
         print("Error:", e)
