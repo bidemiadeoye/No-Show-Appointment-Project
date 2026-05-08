@@ -23,7 +23,11 @@ def load_data():
 
     try:
         with open(file_name, mode='r') as file:
+            # DictReader converts each CSV row into a dictionary
+            # using the column headers as keys.
             reader = csv.DictReader(file)
+            # Convert the CSV data into a list so it can be reused
+            # throughout the program without reopening the file.
             data = list(reader)
 
             if not data:
@@ -81,6 +85,8 @@ def validate_columns(data):
 def overall_no_show_rate(data):
     try:
         total = len(data)
+        # Count how many appointments were marked as "no"
+        # to calculate the missed appointment rate.
         no_show = sum(1 for row in data if safe_get(row, 'attended').lower() == 'no')
 
         rate = (no_show / total) * 100
@@ -96,6 +102,8 @@ def overall_no_show_rate(data):
 # -----------------------------------------------------------
 def print_bar_chart(results):
     for key, value in results.items():
+        # Scale the number of stars to visually represent
+        # percentages in a simple text-based chart.
         bar = '*' * int(value / 2)
         print(f"{key:15} | {bar} ({value:.2f}%)")
     print()
@@ -114,6 +122,8 @@ def no_show_by_day(data):
             if not day:
                 continue
 
+            # Create a new tracking entry for each day
+            # encountered in the dataset.
             if day not in results:
                 results[day] = {'total': 0, 'no_show': 0}
 
@@ -144,6 +154,8 @@ def no_show_by_time(data):
             if not time_val:
                 continue
 
+            # Extract the hour portion of the appointment time
+            # so appointments can be grouped by time of day.
             hour = int(time_val.split(':')[0])
             category = 'Morning' if hour < 12 else 'Afternoon'
 
@@ -180,6 +192,8 @@ def no_show_by_age(data):
 
             age = int(age_val)
 
+            # Patients are grouped into age categories
+            # to identify trends among different populations.
             if age < 18:
                 group = 'Child'
             elif age < 40:
@@ -230,6 +244,8 @@ def export_summary(data):
 
             for day, vals in results.items():
                 rate = (vals['no_show']/vals['total'])*100
+                # Write column headers into the exported CSV file
+                # for easier readability outside the program.
                 writer.writerow([day, round(rate, 2)])
 
         print("\nSummary exported successfully.")
@@ -262,6 +278,8 @@ def show_menu():
 def main():
     data = None
 
+    # Main application loop keeps the program running
+    # until the user chooses to exit.
     while True:
         if data is None:
             data = load_data()
@@ -288,6 +306,7 @@ def main():
         else:
             print("\nInvalid input. Please try again.\n")
 
-
+# This ensures the program only runs when executed directly
+# rather than when imported into another Python file.
 if __name__ == "__main__":
     main()
