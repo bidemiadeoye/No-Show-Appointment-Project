@@ -240,12 +240,12 @@ def export_summary(data):
 
         with open(file_name, mode='w', newline='') as file:
             writer = csv.writer(file)
+            # Write column headers into the exported CSV file
+                # for easier readability outside the program.
             writer.writerow(['Day', 'NoShowRate'])
-
+            
             for day, vals in results.items():
                 rate = (vals['no_show']/vals['total'])*100
-                # Write column headers into the exported CSV file
-                # for easier readability outside the program.
                 writer.writerow([day, round(rate, 2)])
 
         print("\nSummary exported successfully.")
