@@ -245,6 +245,7 @@ def show_menu():
     print("===================================")
     print(" Healthcare No-Show Analysis Tool")
     print("===================================")
+    print("\nPlease select an option from 1-7.")
     print("\n1. Overall No-Show Rate")
     print("2. No-Show by Day")
     print("3. No-Show by Time")
@@ -281,7 +282,8 @@ def main():
         elif choice == '6':
             data = load_data()
         elif choice == '7':
-            break
+    print("\nThank you for using the Healthcare No-Show Analysis Tool.")
+    break
         else:
             print("Invalid input")
 
